@@ -2,7 +2,7 @@
   "name": "subtitles.js",
   "displayName": "Subtitles.js",
   "version": "1.0.0",
-  "description": "Node package to searching subtitles from OpenSubtitles",
+  "description": "OpenSubtitles API wrapper for Node.js",
   "author": "Giovani de Oliveira <giovanioliveira@outlook.com.br>",
   "license": "MIT",
   "main": "index.js",

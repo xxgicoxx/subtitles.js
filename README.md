@@ -1,5 +1,5 @@
 # Subtitles.js
-Node package to searching subtitles from OpenSubtitles.
+OpenSubtitles API wrapper for Node.js.
 
 <p align="center">
   <img src="https://i.imgur.com/LFHvRpi.png ">
