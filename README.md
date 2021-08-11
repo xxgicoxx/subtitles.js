@@ -6,7 +6,7 @@ OpenSubtitles API wrapper for Node.js.
 </p>
 
 # Docs
-Official OpenSubtitles [Documentation](https://opensubtitles.stoplight.io/docs/opensubtitles-api/open_api.json).
+[Documentation](https://opensubtitles.stoplight.io/docs/opensubtitles-api/open_api.json)
 
 # Prerequisites
 * [Node.js](https://nodejs.org/en/)
@@ -19,11 +19,11 @@ npm install subtitles.js
 # Credentials
 ### 1. OpenSubtitles
 ````
-# Account
-Create an OpenSubtitles (https://www.opensubtitles.com/) account.
+# Create an OpenSubtitles account
+Create an OpenSubtitles account on https://opensubtitles.com/.
 
 # API Key
-You can obtain an api key in the API consumers (https://www.opensubtitles.com/consumers) section of your profile. Create a consumer object that will contain the required api key.
+Create an API key on https://www.opensubtitles.com/consumers.
 ````
 
 # Example
@@ -31,14 +31,14 @@ You can obtain an api key in the API consumers (https://www.opensubtitles.com/co
 const OpenSubtitles = require('subtitles.js');
 
 const openSubtitles = new OpenSubtitles({
-  apiKey: 'OPEN_SUBTITLES_API_KEY',
+  apiKey: 'OPENSUBTITLES_API_KEY',
 });
 
-async function example() {
+(async () => {
   try {
     await openSubtitles.login({
-      username: 'OPEN_SUBTITLES_USERNAME',
-      password: 'OPEN_SUBTITLES_PASSWORD',
+      username: 'OPENSUBTITLES_USERNAME',
+      password: 'OPENSUBTITLES_PASSWORD',
     });
 
     const formats = await openSubtitles.subtitleFormats();
@@ -73,7 +73,7 @@ async function example() {
   } catch (error) {
     console.error(error);
   }
-}
+})();
 ```
 
 # Built With
