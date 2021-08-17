@@ -1,6 +1,6 @@
 {
   "name": "subtitles.js",
-  "displayName": "Subtitles.js",
+  "displayName": "subtitles.js",
   "version": "2.0.0",
   "description": "OpenSubtitles API wrapper for Node.js",
   "author": "Giovani de Oliveira <giovanioliveira@outlook.com.br>",

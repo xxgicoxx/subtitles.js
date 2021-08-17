@@ -1,4 +1,4 @@
-# Subtitles.js
+# subtitles.js
 OpenSubtitles API wrapper for Node.js.
 
 <p align="center">
