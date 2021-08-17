@@ -2,7 +2,7 @@
 OpenSubtitles API wrapper for Node.js.
 
 <p align="center">
-  <img src="https://i.imgur.com/LFHvRpi.png ">
+  <img src="assets/imgs/opensubtitles.png ">
 </p>
 
 # Docs
