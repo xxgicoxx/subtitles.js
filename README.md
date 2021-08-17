@@ -36,39 +36,41 @@ const openSubtitles = new OpenSubtitles({
 
 (async () => {
   try {
-    await openSubtitles.login({
+    const login = await openSubtitles.login({
       username: 'OPENSUBTITLES_USERNAME',
       password: 'OPENSUBTITLES_PASSWORD',
     });
 
-    const formats = await openSubtitles.subtitleFormats();
+    const { token } = login;
+
+    const formats = await openSubtitles.infos().formats();
     console.log(formats);
 
-    const languages = await openSubtitles.languages();
+    const languages = await openSubtitles.infos().languages();
     console.log(languages);
 
-    const user = await openSubtitles.userInformations();
+    const user = await openSubtitles.infos().user(token);
     console.log(user);
 
-    const latest = await openSubtitles.latestSubtitles();
+    const latest = await openSubtitles.discover().latestSubtitles();
     console.log(latest);
 
-    const most = await openSubtitles.mostDownloadedSubtitles();
+    const most = await openSubtitles.discover().mostDownloadedSubtitles();
     console.log(most);
 
-    const popular = await openSubtitles.popularFeatures();
+    const popular = await openSubtitles.discover().popularFeatures();
     console.log(popular);
 
-    const file = await openSubtitles.download({ file_id: 2864502 });
+    const file = await openSubtitles.download().download(2864502, token);
     console.log(file);
 
-    const subtitles = await openSubtitles.searchSubtitle({ query: 'Breaking Bad S01E02' });
+    const subtitles = await openSubtitles.subtitles().search({ query: 'Breaking Bad S01E02' });
     console.log(subtitles);
 
-    const features = await openSubtitles.searchFeatures({ query: 'Breaking' });
+    const features = await openSubtitles.features().search({ query: 'Breaking' });
     console.log(features);
 
-    const logout = await openSubtitles.logout();
+    const logout = await openSubtitles.auth().logout(token);
     console.log(logout);
   } catch (error) {
     console.error(error);

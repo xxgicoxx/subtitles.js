@@ -1,92 +1,68 @@
-const { OpenSubtitlesService } = require('../services');
+const {
+  AuthService,
+  DiscoverService,
+  DownloadService,
+  FeaturesService,
+  InfosService,
+  SubtitlesService,
+} = require('../services');
 
 class OpenSubtitlesController {
-  constructor(config = { baseUrl: null, apiKey: null }) {
-    this._service = new OpenSubtitlesService(config);
+  /**
+   * @param {config} config Configs
+   * @param {string} config.apiKey API key
+   */
+  constructor(config) {
+    this._config = config;
+
+    this._authService = new AuthService(this._config);
+    this._discoverService = new DiscoverService(this._config);
+    this._downloadService = new DownloadService(this._config);
+    this._featuresService = new FeaturesService(this._config);
+    this._infosService = new InfosService(this._config);
+    this._subtitlesService = new SubtitlesService(this._config);
   }
 
-  login(credentials = { username: null, password: null }) {
-    return this._service.login(credentials);
+  /**
+   * This is used when you require a OpenSubtitles user
+   */
+  auth() {
+    return this._authService;
   }
 
-  logout() {
-    return this._service.logout();
+  /**
+   * This is used when you require a OpenSubtitles infos
+   */
+  infos() {
+    return this._infosService;
   }
 
-  subtitleFormats() {
-    return this._service.subtitleFormats();
+  /**
+   * This is used when you require a OpenSubtitles discover
+   */
+  discover() {
+    return this._discoverService;
   }
 
-  languages() {
-    return this._service.languages();
+  /**
+   * This is used when you require a OpenSubtitles download
+   */
+  download() {
+    return this._downloadService;
   }
 
-  userInformations() {
-    return this._service.userInformations();
+  /**
+   * This is used when you require a OpenSubtitles subtitles
+   */
+  subtitles() {
+    return this._subtitlesService;
   }
 
-  latestSubtitles(query = { languages: null, type: null }) {
-    return this._service.latestSubtitles(query);
-  }
-
-  mostDownloadedSubtitles(query = { languages: null, type: null }) {
-    return this._service.mostDownloadedSubtitles(query);
-  }
-
-  popularFeatures(query = { languages: null, type: null }) {
-    return this._service.popularFeatures(query);
-  }
-
-  download(body = {
-    file_id: null,
-    sub_format: null,
-    file_name: null,
-    strip_html: null,
-    cleanup_links: null,
-    remove_adds: null,
-    in_fps: null,
-    out_fps: null,
-    timeshift: null,
-  }) {
-    return this._service.download(body);
-  }
-
-  searchSubtitle(query = {
-    id: null,
-    imdb_id: null,
-    tmdb_id: null,
-    type: null,
-    query: null,
-    languages: null,
-    moviehash: null,
-    user_id: null,
-    hearing_impaired: null,
-    foreign_parts_only: null,
-    trusted_sources: null,
-    machine_translated: null,
-    ai_translated: null,
-    order_by: null,
-    order_direction: null,
-    parent_feature_id: null,
-    parent_imdb_id: null,
-    parent_tmdb_id: null,
-    season_number: null,
-    episode_number: null,
-    year: null,
-    moviehash_match: null,
-  }) {
-    return this._service.searchSubtitle(query);
-  }
-
-  searchFeatures(query = {
-    query: null,
-    type: null,
-    feature_id: null,
-    imdb_id: null,
-    tmdb_id: null,
-    year: null,
-  }) {
-    return this._service.searchFeatures(query);
+  /**
+   * This is used when you require a OpenSubtitles features
+   */
+  features() {
+    return this._featuresService;
   }
 }
 
