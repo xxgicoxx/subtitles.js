@@ -6,7 +6,7 @@ OpenSubtitles API wrapper for Node.js.
 </p>
 
 # Docs
-[Documentation](https://opensubtitles.stoplight.io/docs/opensubtitles-api/open_api.json)
+* [Documentation](https://opensubtitles.stoplight.io/docs/opensubtitles-api/open_api.json)
 
 # Prerequisites
 * [Node.js](https://nodejs.org/en/)
