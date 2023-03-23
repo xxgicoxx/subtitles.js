@@ -1,4 +1,4 @@
-const { request } = require('../utils');
+const { constants, request } = require('../utils');
 
 const { apiConfig } = require('../configs');
 
@@ -22,7 +22,7 @@ class AuthService {
   async login(credentials) {
     const login = await request({
       url: `${apiConfig.url}${apiConfig.auth.login}`,
-      method: 'POST',
+      method: constants.POST,
       body: credentials,
       headers: this.headers,
     });
@@ -41,7 +41,7 @@ class AuthService {
   async logout(token) {
     const logout = await request({
       url: `${apiConfig.url}${apiConfig.auth.logout}`,
-      method: 'DELETE',
+      method: constants.DELETE,
       headers: { ...this.headers, Authorization: token },
     });
 

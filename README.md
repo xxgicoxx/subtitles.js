@@ -5,6 +5,19 @@ OpenSubtitles API wrapper for Node.js.
   <img src="assets/imgs/opensubtitles.png ">
 </p>
 
+# Features
+* Login
+* Logout
+* Discover latest subtitles
+* Discover most downloaded subtitles
+* Discover popular features
+* Downloads
+* Search features
+* Formats info
+* Languages info
+* User info
+* Search subtitles
+
 # Docs
 * [Documentation](https://opensubtitles.stoplight.io/docs/opensubtitles-api/open_api.json)
 

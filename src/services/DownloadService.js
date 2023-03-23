@@ -1,4 +1,4 @@
-const { request } = require('../utils');
+const { constants, request } = require('../utils');
 
 const { apiConfig } = require('../configs');
 
@@ -24,7 +24,7 @@ class DownloadService {
   async download(fileId, token, options) {
     const download = await request({
       url: `${apiConfig.url}${apiConfig.download.download}`,
-      method: 'POST',
+      method: constants.POST,
       headers: { ...this.headers, Authorization: token },
       body: { file_id: fileId, ...options },
     });
