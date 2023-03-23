@@ -5,6 +5,7 @@ const {
   FeaturesService,
   InfosService,
   SubtitlesService,
+  UtilitiesService,
 } = require('../services');
 
 class OpenSubtitlesController {
@@ -21,6 +22,7 @@ class OpenSubtitlesController {
     this._featuresService = new FeaturesService(this._config);
     this._infosService = new InfosService(this._config);
     this._subtitlesService = new SubtitlesService(this._config);
+    this._utilitiesService = new UtilitiesService(this._config);
   }
 
   /**
@@ -63,6 +65,13 @@ class OpenSubtitlesController {
    */
   features() {
     return this._featuresService;
+  }
+
+  /**
+   * This is used when you require a OpenSubtitles utilities
+   */
+  utilities() {
+    return this._utilitiesService;
   }
 }
 

@@ -23,6 +23,9 @@ const api = {
   features: {
     features: '/v1/features',
   },
+  utilities: {
+    guessit: '/v1/utilities/guessit',
+  },
 };
 
 module.exports = api;
