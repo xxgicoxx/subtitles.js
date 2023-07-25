@@ -25,7 +25,7 @@ class DownloadService {
     const download = await request({
       url: `${apiConfig.url}${apiConfig.download.download}`,
       method: constants.POST,
-      headers: { ...this.headers, Authorization: token },
+      headers: { ...this.headers, Authorization: `Bearer ${token}` },
       body: { file_id: fileId, ...options },
     });
 

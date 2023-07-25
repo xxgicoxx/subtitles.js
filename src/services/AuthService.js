@@ -42,7 +42,7 @@ class AuthService {
     const logout = await request({
       url: `${apiConfig.url}${apiConfig.auth.logout}`,
       method: constants.DELETE,
-      headers: { ...this.headers, Authorization: token },
+      headers: { ...this.headers, Authorization: `Bearer ${token}` },
     });
 
     return logout;

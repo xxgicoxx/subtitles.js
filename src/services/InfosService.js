@@ -54,7 +54,7 @@ class InfosService {
   async user(token) {
     const user = await request({
       url: `${apiConfig.url}${apiConfig.infos.user}`,
-      headers: { ...this.headers, Authorization: token },
+      headers: { ...this.headers, Authorization: `Bearer ${token}` },
     });
 
     return user;
