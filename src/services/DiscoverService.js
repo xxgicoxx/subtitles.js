@@ -3,8 +3,9 @@ const { request } = require('../utils');
 const { apiConfig } = require('../configs');
 
 class DiscoverService {
-  constructor(config) {
+  constructor(config, ratelimiter) {
     this.config = config;
+    this.ratelimiter = ratelimiter;
     this.headers = {
       'Api-Key': this.config.apiKey,
       'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ class DiscoverService {
    * @returns {Promise} Promise
    */
   async latestSubtitles(options) {
-    const latest = await request({
+    const latest = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.discover.latest}`,
       qs: options,
       headers: this.headers,
@@ -38,7 +39,7 @@ class DiscoverService {
    * @returns {Promise} Promise
    */
   async mostDownloadedSubtitles(options) {
-    const mostDownloaded = await request({
+    const mostDownloaded = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.discover.most_downloaded}`,
       qs: options,
       headers: this.headers,
@@ -56,7 +57,7 @@ class DiscoverService {
    * @returns {Promise} Promise
    */
   async popularFeatures(options) {
-    const popular = await request({
+    const popular = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.discover.popular}`,
       qs: options,
       headers: this.headers,

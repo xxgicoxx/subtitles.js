@@ -3,8 +3,9 @@ const { constants, request } = require('../utils');
 const { apiConfig } = require('../configs');
 
 class AuthService {
-  constructor(config) {
+  constructor(config, ratelimiter) {
     this.config = config;
+    this.ratelimiter = ratelimiter;
     this.headers = {
       'Api-Key': this.config.apiKey,
       'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ class AuthService {
    * @returns {Promise} Promise
    */
   async login(credentials) {
-    const login = await request({
+    const login = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.auth.login}`,
       method: constants.POST,
       body: credentials,
@@ -39,7 +40,7 @@ class AuthService {
    * @returns {Promise} Promise
    */
   async logout(token) {
-    const logout = await request({
+    const logout = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.auth.logout}`,
       method: constants.DELETE,
       headers: { ...this.headers, Authorization: `Bearer ${token}` },

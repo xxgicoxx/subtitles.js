@@ -3,8 +3,9 @@ const { request } = require('../utils');
 const { apiConfig } = require('../configs');
 
 class SubtitlesService {
-  constructor(config) {
+  constructor(config, ratelimiter) {
     this.config = config;
+    this.ratelimiter = ratelimiter;
     this.headers = {
       'Api-Key': this.config.apiKey,
       'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ class SubtitlesService {
    * @returns {Promise} Promise
    */
   async search(options) {
-    const subtitles = await request({
+    const subtitles = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.subtitles.subtitles}`,
       qs: options,
       headers: this.headers,
