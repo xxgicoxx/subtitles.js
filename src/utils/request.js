@@ -19,7 +19,9 @@ async function request(ratelimiter, options = {}) {
   Object.keys(options.qs || {}).forEach((key) => params.append(key, options.qs[key]));
 
   const result = await fetch(`${options.url}?${params}`, { method: options.method || 'GET', body: options.body ? JSON.stringify(options.body) : null, headers: options.headers || {} });
-  ratelimiter.setRemaining(result.headers.get('ratelimit-remaining') || 0);
+  const ratelimitRemaining = result.headers.get('ratelimit-remaining');
+
+  if (ratelimitRemaining) ratelimiter.setRemaining(result.headers.get('ratelimit-remaining'));
 
   return options.type === 'json' || options.type == null ? result.json() : result.text();
 }
