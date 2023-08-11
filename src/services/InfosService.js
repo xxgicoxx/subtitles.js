@@ -3,8 +3,9 @@ const { request } = require('../utils');
 const { apiConfig } = require('../configs');
 
 class InfosService {
-  constructor(config) {
+  constructor(config, ratelimiter) {
     this.config = config;
+    this.ratelimiter = ratelimiter;
     this.headers = {
       'Api-Key': this.config.apiKey,
       'Content-Type': 'application/json',
@@ -19,7 +20,7 @@ class InfosService {
    * @returns {Promise} Promise
    */
   async formats() {
-    const formats = await request({
+    const formats = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.infos.formats}`,
       headers: this.headers,
     });
@@ -35,7 +36,7 @@ class InfosService {
    * @returns {Promise} Promise
    */
   async languages() {
-    const languages = await request({
+    const languages = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.infos.languages}`,
       headers: this.headers,
     });
@@ -52,9 +53,9 @@ class InfosService {
    * @returns {Promise} Promise
    */
   async user(token) {
-    const user = await request({
+    const user = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.infos.user}`,
-      headers: { ...this.headers, Authorization: token },
+      headers: { ...this.headers, Authorization: `Bearer ${token}` },
     });
 
     return user;

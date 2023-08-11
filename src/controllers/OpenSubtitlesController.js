@@ -7,6 +7,7 @@ const {
   SubtitlesService,
   UtilitiesService,
 } = require('../services');
+const RateLimiter = require('../classes/RateLimiter');
 
 class OpenSubtitlesController {
   /**
@@ -15,14 +16,15 @@ class OpenSubtitlesController {
    */
   constructor(config) {
     this._config = config;
+    this._ratelimiter = new RateLimiter(5);
 
-    this._authService = new AuthService(this._config);
-    this._discoverService = new DiscoverService(this._config);
-    this._downloadService = new DownloadService(this._config);
-    this._featuresService = new FeaturesService(this._config);
-    this._infosService = new InfosService(this._config);
-    this._subtitlesService = new SubtitlesService(this._config);
-    this._utilitiesService = new UtilitiesService(this._config);
+    this._authService = new AuthService(this._config, new RateLimiter(1));
+    this._discoverService = new DiscoverService(this._config, this._ratelimiter);
+    this._downloadService = new DownloadService(this._config, this._ratelimiter);
+    this._featuresService = new FeaturesService(this._config, this._ratelimiter);
+    this._infosService = new InfosService(this._config, this._ratelimiter);
+    this._subtitlesService = new SubtitlesService(this._config, this._ratelimiter);
+    this._utilitiesService = new UtilitiesService(this._config, this._ratelimiter);
   }
 
   /**

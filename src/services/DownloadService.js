@@ -3,8 +3,9 @@ const { constants, request } = require('../utils');
 const { apiConfig } = require('../configs');
 
 class DownloadService {
-  constructor(config) {
+  constructor(config, ratelimiter) {
     this.config = config;
+    this.ratelimiter = ratelimiter;
     this.headers = {
       'Api-Key': this.config.apiKey,
       'Content-Type': 'application/json',
@@ -22,10 +23,10 @@ class DownloadService {
    * @returns {Promise} Promise
    */
   async download(fileId, token, options) {
-    const download = await request({
+    const download = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.download.download}`,
       method: constants.POST,
-      headers: { ...this.headers, Authorization: token },
+      headers: { ...this.headers, Authorization: `Bearer ${token}` },
       body: { file_id: fileId, ...options },
     });
 

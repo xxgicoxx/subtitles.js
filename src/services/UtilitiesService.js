@@ -3,8 +3,9 @@ const { request } = require('../utils');
 const { apiConfig } = require('../configs');
 
 class UtilitiesService {
-  constructor(config) {
+  constructor(config, ratelimiter) {
     this.config = config;
+    this.ratelimiter = ratelimiter;
     this.headers = {
       'Api-Key': this.config.apiKey,
       'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ class UtilitiesService {
    * @returns {Promise} Promise
    */
   async guessit(options) {
-    const features = await request({
+    const features = await request(this.ratelimiter, {
       url: `${apiConfig.url}${apiConfig.utilities.guessit}`,
       qs: options,
       headers: this.headers,
