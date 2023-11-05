@@ -13,9 +13,15 @@ class OpenSubtitlesController {
   /**
    * @param {config} config Configs
    * @param {string} config.apiKey API key
+   * @param {string} config.appName Application name
+   * @param {string} config.appVersion Application version
    */
   constructor(config) {
     this._config = config;
+
+    if(!config.appName || !config.appVersion)
+      throw new Error("Missing appName or appVersion in config");
+
     this._ratelimiter = new RateLimiter(5);
 
     this._authService = new AuthService(this._config, new RateLimiter(1));

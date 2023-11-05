@@ -9,6 +9,7 @@ class DownloadService {
     this.headers = {
       'Api-Key': this.config.apiKey,
       'Content-Type': 'application/json',
+      'User-Agent': `${config.appName} v${config.appVersion}`
     };
   }
 
